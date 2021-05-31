@@ -1,8 +1,21 @@
 const container = document.querySelector(".container");
+const reset = document.querySelector(".reset")
 
-
-let dimensionDesired = 16
+let dimensionDesired = 5
 createGrid(Math.pow(dimensionDesired, 2));
+
+
+
+
+
+
+reset.addEventListener("click", (e) => {
+  let grid = document.querySelectorAll(".square");
+
+  for (let i=0; i<grid.length; i++){
+    grid[i].style.backgroundColor = "rgb(255, 255, 255)"
+  }
+})
 
 
 
