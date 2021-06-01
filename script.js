@@ -1,15 +1,16 @@
 const container = document.querySelector(".container");
 const clear = document.querySelector(".clear-grid");
-const form = document.querySelector(".create-grid");
+const resize = document.querySelector(".resize-grid");
 
-let dimensionDesired = 5;
+let dimensionDesired = 3;
 createGrid(Math.pow(dimensionDesired, 2));
 
 
-form.addEventListener("submit", resizeGrid);
-
 
 clear.addEventListener("click", clearGrid);
+
+
+resize.addEventListener("click", resizeGrid)
 
 
 
@@ -18,14 +19,9 @@ clear.addEventListener("click", clearGrid);
 /**** Resizes the grid ****/
 function resizeGrid(e) {
 
-  e.preventDefault();
-  const value = form.querySelector("input[type='text']").value;
-  console.log(value);
-
-
-  form.querySelector("input[type='text']").value = ""
-  clearGrid();
-
+  dimensionDesired = prompt("Select size of grid (Maximum of 80)");
+  createGrid(Math.pow(dimensionDesired, 2));
+  console.log(dimensionDesired);
 
 }
 
