@@ -1,22 +1,47 @@
 const container = document.querySelector(".container");
-const reset = document.querySelector(".reset")
+const clear = document.querySelector(".clear-grid");
+const form = document.querySelector(".create-grid");
 
-let dimensionDesired = 5
+let dimensionDesired = 5;
 createGrid(Math.pow(dimensionDesired, 2));
 
 
+form.addEventListener("submit", resizeGrid);
+
+
+clear.addEventListener("click", clearGrid);
 
 
 
 
-reset.addEventListener("click", (e) => {
+
+/**** Resizes the grid ****/
+function resizeGrid(e) {
+
+  e.preventDefault();
+  const value = form.querySelector("input[type='text']").value;
+  console.log(value);
+
+
+  form.querySelector("input[type='text']").value = ""
+  clearGrid();
+
+
+}
+
+
+
+
+/**** Resets all squares to white background ****/
+function clearGrid() {
   let grid = document.querySelectorAll(".square");
 
   for (let i=0; i<grid.length; i++){
     grid[i].style.backgroundColor = "rgb(255, 255, 255)"
   }
-})
 
+
+};
 
 
 
