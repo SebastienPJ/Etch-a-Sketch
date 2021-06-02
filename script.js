@@ -1,29 +1,38 @@
 const container = document.querySelector(".container");
 const clear = document.querySelector(".clear-grid");
-const resize = document.querySelector(".resize-grid");
+const range = document.querySelector(".grid-range");
+ 
 
-let dimensionDesired = 3;
+let dimensionDesired = range.value;
 createGrid(Math.pow(dimensionDesired, 2));
 
 
 
 clear.addEventListener("click", clearGrid);
 
-
-resize.addEventListener("click", resizeGrid)
-
+range.addEventListener("input", resizeGrid);
 
 
 
 
-/**** Resizes the grid ****/
-function resizeGrid(e) {
 
-  dimensionDesired = prompt("Select size of grid (Maximum of 80)");
+/***** Resizes grid based on range input ****/
+function resizeGrid() {
+  dimensionDesired = range.value;
+  removeOldGrid();
   createGrid(Math.pow(dimensionDesired, 2));
-  console.log(dimensionDesired);
-
 }
+
+
+
+/**** Removes old grid before creating new one ****/
+function removeOldGrid() {
+  let squares = document.querySelectorAll(".square");
+  for (i = 0; i < squares.length; i++) {
+    container.removeChild(squares[i])
+  }
+}
+
 
 
 
