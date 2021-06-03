@@ -16,6 +16,15 @@ range.addEventListener("input", resizeGrid);
 
 
 
+
+
+
+
+
+
+
+
+
 /***** Resizes grid based on range input ****/
 function resizeGrid() {
   dimensionDesired = range.value;
@@ -69,6 +78,48 @@ function createGrid(numberOfBoxes) {
 }
 
 
+
+
+
+
+
+
+
+let r;
+let g; 
+let b;
+
+
+function changeColorRainbow(e) {
+  let rgb = "rgb(255, 255, 255)"
+  let rgbArrayRainbow;
+
+  
+  rgbArrayRainbow = rgb.substring(4, rgb.length-1)
+      .replace(/ /g, '')
+      .split(',');
+
+  console.log(rgbArrayRainbow);
+
+  for (i = 0; i < 3; i++) {
+
+    let number = createRandomNumber();
+    rgbArrayRainbow[i] = number
+
+
+  }
+  console.log( rgbArrayRainbow);
+}
+
+
+
+function createRandomNumber() {
+  let randomNumber = Math.floor(Math.random() * 256)
+  return randomNumber
+
+}
+
+changeColorRainbow();
 
 
 /****** Checks color of current square, if default color changes to light gray 
