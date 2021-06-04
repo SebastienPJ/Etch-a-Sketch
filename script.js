@@ -1,27 +1,62 @@
 const container = document.querySelector(".container");
 const clear = document.querySelector(".clear-grid");
 const range = document.querySelector(".grid-range");
- 
+const black = document.querySelector(".black")
+const rainbow = document.querySelector(".rainbow");
+const shadow = document.querySelector(".shadow");
+const lighten = document.querySelector(".lighten");
+
+
+let state = "black"; 
+
+clear.addEventListener("click", clearGrid);
+
+range.addEventListener("input", resizeGrid);
+
+black.addEventListener("click", (e) =>{
+  state = "black";
+})
+
+rainbow.addEventListener("click", (e) =>{
+  state = "rainbow";
+})
+
+shadow.addEventListener("click", (e) =>{
+  state = "shadow";
+
+});
+
+lighten.addEventListener("click", (e) =>{
+  state = "lighten";
+})
+
+
+
 
 let dimensionDesired = range.value;
 createGrid(Math.pow(dimensionDesired, 2));
 
 
 
-clear.addEventListener("click", clearGrid);
-
-range.addEventListener("input", resizeGrid);
 
 
+/* Creates # of boxes desired inside of container 
+    and adds mouseover event listener to them */
+    function createGrid(numberOfBoxes) {
 
-
-
-
-
-
-
-
-
+      for (let i = 0; i < numberOfBoxes; i++) {
+        let num = Math.sqrt(numberOfBoxes);
+        let num2 = (1 / num) * 100; 
+    
+        let size = `calc(${num2}% - 2px)`;
+        let div = document.createElement("div");
+        div.setAttribute("style", `border: 1px solid black; background-color: rgb(255, 255, 255); height: ${size}; flex-basis: ${size}; flex-grow: 1;`);
+        div.classList.add("square");
+        container.appendChild(div); 
+        div.addEventListener("mouseover", changeColor)
+      }
+      
+    }
 
 
 
@@ -59,20 +94,38 @@ function clearGrid() {
 
 
 
-/* Creates # of boxes desired inside of container 
-    and adds mouseover event listener to them */
-function createGrid(numberOfBoxes) {
 
-  for (let i = 0; i < numberOfBoxes; i++) {
-    let num = Math.sqrt(numberOfBoxes);
-    let num2 = (1 / num) * 100; 
 
-    let size = `calc(${num2}% - 2px)`;
-    let div = document.createElement("div");
-    div.setAttribute("style", `border: 1px solid black; background-color: rgb(255, 255, 255); height: ${size}; flex-basis: ${size}; flex-grow: 1;`);
-    div.classList.add("square");
-    container.appendChild(div); 
-    div.addEventListener("mouseover", changeColor)
+/****** Checks color of current square, if default color changes to light gray 
+and becomes darker at each pass ******/
+function changeColor(e) {
+  let rainbow = true;
+  let currentColor = e.target.style.backgroundColor;
+  let rgbArray = []; 
+
+  let newRGB = [];
+  let newRgbString;
+  
+  switch (state) {
+    case "black":
+      e.target.style.backgroundColor = "rgb(110,110,110)";
+      break;
+    
+    case "rainbow":
+      e.target.style.backgroundColor = changeColorRainbow();
+      break;
+    
+
+    case "shadow":
+    case "lighten":
+      e.target.style.backgroundColor = createHighlight(e);
+      break;
+
+
+
+    default:
+      console.log("No conditions met");
+      break;
   }
   
 }
@@ -82,36 +135,12 @@ function createGrid(numberOfBoxes) {
 
 
 
+function changeColorRainbow() {
+
+  return `rgb(${createRandomNumber()}, ${createRandomNumber()}, ${createRandomNumber()})`;
 
 
-
-let r;
-let g; 
-let b;
-
-
-function changeColorRainbow(e) {
-  let rgb = "rgb(255, 255, 255)"
-  let rgbArrayRainbow;
-
-  
-  rgbArrayRainbow = rgb.substring(4, rgb.length-1)
-      .replace(/ /g, '')
-      .split(',');
-
-  console.log(rgbArrayRainbow);
-
-  for (i = 0; i < 3; i++) {
-
-    let number = createRandomNumber();
-    rgbArrayRainbow[i] = number
-
-
-  }
-  console.log( rgbArrayRainbow);
 }
-
-
 
 function createRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 256)
@@ -119,38 +148,43 @@ function createRandomNumber() {
 
 }
 
-changeColorRainbow();
 
 
-/****** Checks color of current square, if default color changes to light gray 
-        and becomes darker at each pass ******/
-function changeColor(e) {
-  let currentColor = e.target.style.backgroundColor;
-  let rgbArray = []; 
 
-  let newRGB = [];
-  let newRgbString;
- 
-  if (currentColor == "rgb(255, 255, 255)") {
-    e.target.style.backgroundColor = "rgb(100, 100, 100)";
+function createHighlight(currentSquare) {
+  let currentColor = currentSquare.target.style.backgroundColor;
+  let rgbArray = [];
+  let newArray = [];
 
-  } else {
-
-    // Takes square's current rgb and puts values into an array
-    rgbArray = currentColor.substring(4, currentColor.length-1)
-          .replace(/ /g, '')
-          .split(',');
-
-    // Makes current color darker
-    for (let i = 0; i < 3; i++ ){
-      let newColor = rgbArray[i] - 10
-      newRGB.push(newColor)
-    };
-
-    newRgbString = newRGB.toString();
+  // Takes square's current rgb and puts values into an array  
+  rgbArray = currentColor.substring(4, currentColor.length-1)
+            .replace(/ /g, '')
+            .split(',');
 
 
-    e.target.style.backgroundColor = `rgb(${newRgbString})`
 
-  }
+  if (state == "shadow") {
+    for (i=0; i<3; i++){
+      let newColor = Math.floor(rgbArray[i] - (rgbArray[i]*.1));
+      newArray.push(newColor)
+      
+    }
+
+
+  } else if (state == "lighten") {
+    for (i=0; i<3; i++){
+      let newColor = Math.floor(Number(rgbArray[i]) + (Number(rgbArray[i])*.1));
+      newArray.push(newColor)
+    }
+
+  } 
+
+  let newArrayString = newArray.toString()
+
+  let newRGB = `rgb(${newArrayString})`
+  return newRGB
 }
+
+
+
+
