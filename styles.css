@@ -1,8 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: rgb(204, 255, 255);
 }
 
+header {
+  text-align: center;
+
+}
 
 .container {
   display: flex;
@@ -16,7 +21,10 @@ html, body {
 }
 
 .menu {
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .selected {

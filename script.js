@@ -57,10 +57,14 @@ createGrid(Math.pow(dimensionDesired, 2));
 function highlightSelectedButton(buttonClicked) {
   Array.prototype.forEach.call(stateButtons, (button) => {
     button.classList.remove("selected")
-  })
+  });
 
+  if (buttonClicked.target.textContent == "Reset") {
+    black.classList.add("selected")
+  } else {
+    buttonClicked.target.classList.add("selected");
+  }
   
-  buttonClicked.target.classList.add("selected")
 }
 
 
@@ -107,7 +111,7 @@ function removeOldGrid() {
 
 
 /**** Resets all squares to white background ****/
-function clearGrid() {
+function clearGrid(e) {
   let grid = document.querySelectorAll(".square");
 
   for (let i=0; i<grid.length; i++){
@@ -115,6 +119,8 @@ function clearGrid() {
   }
 
   state = "black";
+
+  highlightSelectedButton(e);
 
 };
 
@@ -125,12 +131,6 @@ function clearGrid() {
 /****** Checks color of current square, if default color changes to light gray 
 and becomes darker at each pass ******/
 function changeColor(e) {
-  let rainbow = true;
-  let currentColor = e.target.style.backgroundColor;
-  let rgbArray = []; 
-
-  let newRGB = [];
-  let newRgbString;
   
   switch (state) {
     case "black":
@@ -150,7 +150,7 @@ function changeColor(e) {
 
 
     default:
-      console.log("No conditions met");
+      console.log("Error: No conditions met");
       break;
   }
   
