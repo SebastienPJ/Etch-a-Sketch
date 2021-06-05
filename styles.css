@@ -12,5 +12,15 @@ html, body {
   height: 600px;
   width: 600px;
   border: 1px solid black;
-  margin-left: 50px;
+  margin: 5% auto;
 }
+
+.menu {
+  margin: auto;
+}
+
+.selected {
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+

@@ -1,34 +1,49 @@
 const container = document.querySelector(".container");
-const clear = document.querySelector(".clear-grid");
+const reset = document.querySelector(".reset-grid");
 const range = document.querySelector(".grid-range");
+
+
 const black = document.querySelector(".black")
 const rainbow = document.querySelector(".rainbow");
 const shadow = document.querySelector(".shadow");
 const lighten = document.querySelector(".lighten");
 
+const stateButtons = document.querySelectorAll(".state");
+
 
 let state = "black"; 
 
-clear.addEventListener("click", clearGrid);
+reset.addEventListener("click", clearGrid);
 
 range.addEventListener("input", resizeGrid);
 
 black.addEventListener("click", (e) =>{
   state = "black";
+  highlightSelectedButton(e)
+
 })
 
 rainbow.addEventListener("click", (e) =>{
   state = "rainbow";
+  highlightSelectedButton(e)
+
 })
 
 shadow.addEventListener("click", (e) =>{
   state = "shadow";
+  highlightSelectedButton(e)
+
 
 });
 
 lighten.addEventListener("click", (e) =>{
   state = "lighten";
+  highlightSelectedButton(e)
 })
+
+
+
+
 
 
 
@@ -37,6 +52,16 @@ let dimensionDesired = range.value;
 createGrid(Math.pow(dimensionDesired, 2));
 
 
+
+/****** Highlights whichever button user selects ******/
+function highlightSelectedButton(buttonClicked) {
+  Array.prototype.forEach.call(stateButtons, (button) => {
+    button.classList.remove("selected")
+  })
+
+  
+  buttonClicked.target.classList.add("selected")
+}
 
 
 
@@ -89,6 +114,7 @@ function clearGrid() {
     grid[i].style.backgroundColor = "rgb(255, 255, 255)"
   }
 
+  state = "black";
 
 };
 
@@ -150,7 +176,8 @@ function createRandomNumber() {
 
 
 
-
+/***** Lightens or Darkens current square depending on 
+       Shadow or Lighten button selected ******/
 function createHighlight(currentSquare) {
   let currentColor = currentSquare.target.style.backgroundColor;
   let rgbArray = [];

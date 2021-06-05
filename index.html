@@ -8,14 +8,24 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <button type="button" class="clear-grid">Reset</button>
-  <button type="button" class="black">Black</button>
-  <button type="button" class="rainbow">Rainbow</button>
-  <button type="button" class="shadow">Shadow</button>
-  <button type="button" class="lighten">Lighten</button>
+  <header>
+    <h1>Etch-a-Sketch</h1>
+    <h3>A sandbox for imagination</h3>
+  </header>
+
+  <div class="menu">
+    <button type="button" class="reset-grid">Reset</button>
+    <button type="button" class="black state selected">Black</button>
+    <button type="button" class="rainbow state">Rainbow</button>
+    <button type="button" class="shadow state">Shadow</button>
+    <button type="button" class="lighten state">Lighten</button>
+  
+  
+    <input type="range" name="" class="grid-range" min="1" max="90" value="20" step="1">
 
 
-  <input type="range" name="" class="grid-range" min="1" max="90" value="20" step="1">
+  </div>
+
 
 
   <div class="container">
