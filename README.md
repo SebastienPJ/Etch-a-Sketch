@@ -1,7 +1,7 @@
 # Etch-a-Sketch
 
 
-![Solution Screenshot](screenshot/screenshot.png)
+![Project Screenshot](images/screenshot.png)
 
 Here is my solution to the Etch-a-Sketch project fron The Odin project.
 
