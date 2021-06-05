@@ -1,5 +1,8 @@
 # Etch-a-Sketch
 
+
+![Solution Screenshot](screenshot/screenshot.png)
+
 Here is my solution to the Etch-a-Sketch project fron The Odin project.
 
 I used HTML, CSS, and Javascript to complete this project.
