@@ -5,6 +5,9 @@
 
 Here is my solution to the Etch-a-Sketch project fron The Odin project.
 
+[Live Page](https://sebastienpj.github.io/Etch-a-Sketch/)
+
+
 I used HTML, CSS, and Javascript to complete this project.
 
 
