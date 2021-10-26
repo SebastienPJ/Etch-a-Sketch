@@ -3,9 +3,9 @@
 
 ![Project Screenshot](images/screenshot.png)
 
-Here is my solution to the Etch-a-Sketch project fron The Odin project.
-
 [Live Page](https://sebastienpj.github.io/Etch-a-Sketch/)
+
+Here is my solution to the Etch-a-Sketch project fron The Odin project.
 
 
 I used HTML, CSS, and Javascript to complete this project.
